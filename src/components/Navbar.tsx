@@ -10,8 +10,8 @@ const Navbar = () => {
   const [mobileDrawer, setMobileDrawer] = useState(false)
   return (
     <nav className='container-fluid '>
-      <div className='container'>
-      <div className=' bg-red-200 px-lg-16 w-full h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center'>
+      <div className='container pl-[0.5rem] lg:pl-[2rem] '>
+      <div className=' bg-red-200 z-40 lg:w-[95%] w-[95%]  fixed h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center'>
         
        <div className='flex '>
        <button className='lg:hidden pl-3'
@@ -19,7 +19,7 @@ const Navbar = () => {
        >
           {mobileDrawer ? <X/> : <Menu/> }
           </button>
-        <div className='logo ' >
+        <div className='logo' >
           <Image src="/assets/file.png"  alt='logo' width={100} height={100} />
         </div>
        </div>
@@ -40,7 +40,8 @@ const Navbar = () => {
       </div>
 
       {mobileDrawer && (
-  <div className=' justify-end flex flex-col items-center py-10 overflow-visible lg:hidden' >
+  // <div className=' justify-end z-1 flex flex-col items-center py-10 overflow-visible lg:hidden' >
+  <div className='fixed top-[90px] w-full bg-white shadow-lg lg:hidden z-40'>
       <ul className='flex flex-col items-center'>
     {NAV_LINKS.map((item, indx) => (
       <li key={indx} className='py-3'>

@@ -16,6 +16,14 @@ export const products = {
     type:'string',
   },
   {
+    name:"slug",
+    title: 'slug',
+    type:'slug',
+    options:{
+      source:'title'
+  }
+  },
+  {
     name:"price",
     title:"Price",
     type:"string",

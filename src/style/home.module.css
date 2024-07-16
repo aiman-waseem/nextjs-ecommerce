@@ -1,0 +1,31 @@
+.bannerImg{
+    background-image: url("/assets/banner-ecom-img.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+    padding-top: 3rem;
+}
+.promo1{
+    background-image: url("/assets/promo-img3.jpg");
+
+}
+.promo2{
+    background-image: url("/assets/promo-img4.jpg");
+
+}
+.promo1::after {
+    content: "";
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Black transparent overlay */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.promo1:hover::after {
+    opacity: 1;
+}
