@@ -15,10 +15,11 @@ export interface IProduct {
       productCategory: string;
     };
     prodImg: any;
+    slug:string
   }
 
 export const getAllProductsData = async (setProducts) =>{
-    const query = `*[_type == "product"]{title,price,description,"category":category->{productCategory},"prodImg":productImage[].asset._ref}`
+    const query = `*[_type == "product"]{title,price,"slug":slug.current,description,"category":category->{productCategory},"prodImg":productImage[].asset._ref}`
     try {
         const data = await client.fetch(query)
         console.log("Get All Product Data", data)

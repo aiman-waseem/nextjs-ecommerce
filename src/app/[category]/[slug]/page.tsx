@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Women = () => {
+const Slug = () => {
   return (
     <div>
-      
+      Slug
     </div>
   )
 }
 
-export default Women
+export default Slug
