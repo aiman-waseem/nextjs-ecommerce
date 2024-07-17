@@ -4,6 +4,7 @@ import { ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { urlForImage } from '../../../sanity/lib/image'
+import Link from 'next/link'
 
 
 // params is an object with key category of type string
@@ -14,8 +15,8 @@ const Category = ({params}:{params:{category:string}}) => {
         getAllProductsData(setProducts)
       }, [])
 
-      const filterCategory = products.filter(item => item.category.productCategory.toLowerCase() === params.category.toLowerCase())
-
+ const filterCategory = products.filter(item => item.category.productCategory.toLowerCase() === params.category.toLowerCase())
+  console.log("Params",params)
     //   console.log(" FILTER Products from category page", filterCategory)
   return (
     <div className='container'>
@@ -24,7 +25,7 @@ const Category = ({params}:{params:{category:string}}) => {
           const { productCategory } = item.category;
           return (
             <div key={item.slug} className='mt-5 p-3 rounded-xl shadow-lg'>
-              <div>
+              <Link href={`/${productCategory}/${item.slug}`}>
                 <Image
                   className='min-h-[266px]  cursor-pointer'
                   alt='img'
@@ -33,7 +34,7 @@ const Category = ({params}:{params:{category:string}}) => {
                   height={100}
                 //   onClick={() => handleProductClick(productCategory, item.slug)}
                 />
-              </div>
+              </Link>
               <div className='pt-2 flex justify-between items-center'>
                 <div>
                   <h2 className='text-base capitalize font-medium'>{item.title}</h2>

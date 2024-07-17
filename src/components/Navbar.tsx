@@ -33,9 +33,9 @@ const Navbar = () => {
            ) )}
           </ul>
         </div>
-        <div className='pr-4'>
+        <Link href="/cart" className='pr-4'>
         <ShoppingCart/>
-        </div>
+        </Link >
       </div>
       </div>
 
