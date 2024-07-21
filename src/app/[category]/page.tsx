@@ -5,17 +5,21 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { urlForImage } from '../../../sanity/lib/image'
 import Link from 'next/link'
+import { useAppSelector } from '../store/hooks'
 
 
 // params is an object with key category of type string
 const Category = ({params}:{params:{category:string}}) => {
     const [products, setProducts] = useState<IProduct[]>([])
 
-    useEffect(() => {
-        getAllProductsData(setProducts)
-      }, [])
+    //getting product data from reducer
+    const allProducts = useAppSelector((state) => state.cart.products) 
 
- const filterCategory = products.filter(item => item.category.productCategory.toLowerCase() === params.category.toLowerCase())
+    // useEffect(() => {
+    //     getAllProductsData(setProducts)
+    //   }, [])
+
+ const filterCategory = allProducts.filter(item => item.category.productCategory.toLowerCase() === params.category.toLowerCase())
   console.log("Params",params)
     //   console.log(" FILTER Products from category page", filterCategory)
   return (

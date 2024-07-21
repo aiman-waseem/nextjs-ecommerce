@@ -87,35 +87,46 @@
 import React, { useEffect, useState } from 'react'
 import { client } from '../../../sanity/lib/client'
 import { IProduct, getAllProductsData } from '@/lib/ProductData'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+
 import Image from 'next/image'
 import { urlForImage } from '../../../sanity/lib/image'
 import { ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { ADD_TO_CART } from '@/reducer/reducer'
+
+// The `state` arg is correctly typed as `RootState` already
 
 const AllProducts = () => {
   const router = useRouter()
+  const allProducts = useAppSelector((state) => state.cart.products)
+const dispatch = useAppDispatch()
   const [products, setProducts] = useState<IProduct[]>([])
 
   useEffect(() => {
-    getAllProductsData(setProducts)
-  }, [])
+    getAllProductsData(setProducts,dispatch)
+    
 
+  }, [])
+    console.log("Products from reducer", allProducts)
   const handleProductClick = (category:string, productName:string) => {
     router.push(`/${category}/${productName}`)
   }
-
+const handleCart=(product:IProduct)=>{
+  const addCart = {
+    productId: product?._id,
+    productName: product?.title,
+    productCategory: product?.category,
+    price:product?.price,
+    productImage:product?.prodImg,
+    qty:1,
+  }
+  dispatch(ADD_TO_CART(addCart))
+}
   return (
     <div className='container'>
       <div className='grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 pt-20 gap-10 justify-center'>
-        {products.map((item) => {
+        {allProducts.map((item) => {
           const { productCategory } = item.category;
           return (
             <div key={item.slug} className='mt-5 p-3 rounded-xl shadow-lg'>
@@ -142,6 +153,10 @@ const AllProducts = () => {
                     cursor: "pointer",
                   }}
                   className='flex justify-center items-center border border-black'
+                  // onClick={()=> dispatch(ADD_TO_CART({
+                  //   payload: 
+                  // }))}
+                  onClick={()=> handleCart(item)}
                 >
                   <ShoppingCart size={18} />
                 </div>

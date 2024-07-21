@@ -48,10 +48,14 @@ import React, { useEffect, useState } from 'react'
 import { urlForImage } from '../../sanity/lib/image'
 import { Button } from './ui/button'
 import { ShoppingCart } from 'lucide-react'
+import { ADD_TO_CART } from '@/reducer/reducer'
+import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '@/app/store/hooks'
 
 const ProductDetails = ({params}:{params: {category:string, slug:string}}) => {
     const [product, setProduct] = useState<IProduct|null>(null)
-
+ const [quantity, setQuantity]= useState(1)
+ const dispatch = useAppDispatch()
     useEffect(()=>{
         getSingleProduct(params.slug, setProduct)
     },[])
@@ -61,7 +65,19 @@ const ProductDetails = ({params}:{params: {category:string, slug:string}}) => {
     // if (!product) {
     //     return <div>Loading...</div>
     // }
-     console.log("Product Image", product?.prodImg[0])
+   const handleAddToCart = () =>{
+    const addCart = {
+           productId: product?._id,
+          productName: product?.title,
+          productCategory: product?.category,
+          price:product?.price,
+          productImage:product?.prodImg,
+          qty: quantity,
+        }
+        dispatch(ADD_TO_CART(addCart))
+      
+   }
+
     return (
         <div className='container pt-20'>
             <div className='grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 justify-center'>
@@ -95,17 +111,22 @@ const ProductDetails = ({params}:{params: {category:string, slug:string}}) => {
                 <div className='pt-8 flex items-center space-x-5'>
                     <p className='text-[1.22rem] font-bold'> Quantity:</p>
                      <div className='space-x-4 text-lg font-medium'>
-                        <span> -</span>
-                        <span>2 </span>
-                        <span> + </span>
+                        <span
+                        className='cursor-pointer'
+                          onClick={()=> {quantity>1 && setQuantity(quantity-1)}}
+                        > -</span>
+                        <span>{quantity} </span>
+                        <span className='cursor-pointer' onClick={()=>setQuantity(quantity+1)}> + </span>
                      </div>
                 </div>
 
                    
-                <h2 className='font-extrabold text-2xl pt-7'> {product?.price} </h2>
+                <h2 className='font-extrabold text-2xl pt-7'> {product?.price ? product.price * quantity : 'Loading...'}</h2>
 
                 <div className='pt-7'>
-                <Button className='bg-black rounded space-x-2  text-white p-4' variant={'default'}>
+                <Button className='bg-black rounded space-x-2  text-white p-4' variant={'default'}
+                 onClick={handleAddToCart}
+                >
                     <ShoppingCart size={19} />
                     <span className='px-1 tracking-wide capitalize text-[1rem]'>
                     Add to Cart

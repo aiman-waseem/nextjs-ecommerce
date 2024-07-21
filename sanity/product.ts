@@ -26,7 +26,7 @@ export const products = {
   {
     name:"price",
     title:"Price",
-    type:"string",
+    type:"number",
   },
   {
     name:"productImage",
@@ -38,6 +38,22 @@ export const products = {
       type:"image",
     }]
   },
+  // {
+  //   name: 'availableSizes',
+  //   title: 'Available Sizes',
+  //   type: 'array',
+  //   of: [{
+  //     type: 'string',
+  //     options: {
+  //       list: [
+  //         { title: 'Small', value: 'small' },
+  //         { title: 'Medium', value: 'medium' },
+  //         { title: 'Large', value: 'large' }
+  //       ]
+  //     }
+  //   }],
+  //   // No validation property makes this field optional
+  // },
   defineField({
     name:"category",
     type:"reference",

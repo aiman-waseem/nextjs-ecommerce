@@ -1,4 +1,5 @@
 "use client"
+import { useAppSelector } from '@/app/store/hooks'
 import { NAV_LINKS } from '@/lib/staticData'
 import { Menu, ShoppingCart, X } from 'lucide-react'
 import Image from 'next/image'
@@ -7,12 +8,14 @@ import React, { useState } from 'react'
 
 
 const Navbar = () => {
+  const cartItems = useAppSelector((state) => state.cart.cartItems)
+ console.log("CART ITEMS", cartItems.length)
   const [mobileDrawer, setMobileDrawer] = useState(false)
   return (
     <nav className='container-fluid '>
       <div className='container pl-[0.5rem] lg:pl-[2rem] '>
       <div className=' bg-red-200 z-40 lg:w-[95%] w-[95%]  fixed h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center'>
-        
+      
        <div className='flex '>
        <button className='lg:hidden pl-3'
        onClick={()=> setMobileDrawer(!mobileDrawer)}
@@ -34,7 +37,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link href="/cart" className='pr-4'>
-        <ShoppingCart/>
+        <span><ShoppingCart/> {cartItems.length} </span>
         </Link >
       </div>
       </div>
