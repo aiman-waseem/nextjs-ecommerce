@@ -29,17 +29,16 @@ export const cartSlice = createSlice({
       UPDATE_QUANTITY:(state,action: PayloadAction<any>)=>{
          const pIndex = state.cartItems.findIndex((item)=> item.productId === action.payload.productId )
          console.log("Is product", pIndex)
-        //  if (pIndex.length>0){
-        //   if (action.payload.state === "inc" ){
-        //    console.log("Inc qty", action.payload)
-        //    return{
-            
-        //    }
-        //     // [...state.cartItems, qty: qty+1 ]
-        //   }
-        //  }
+      
         if (pIndex>=0){
           if (action.payload.state === "inc") {
+            state.cartItems[pIndex].qty = (
+              Number(state.cartItems[pIndex].qty) + 1
+            ).toString();
+  
+            // localStorage.setItem("cart", JSON.stringify(state.basket));
+          }
+           else if (action.payload.state === "dec") {
             state.cartItems[pIndex].qty = (
               Number(state.cartItems[pIndex].qty) + 1
             ).toString();
