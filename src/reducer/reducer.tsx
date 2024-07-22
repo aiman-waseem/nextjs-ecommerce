@@ -40,7 +40,7 @@ export const cartSlice = createSlice({
           }
            else if (action.payload.state === "dec") {
             state.cartItems[pIndex].qty = (
-              Number(state.cartItems[pIndex].qty) + 1
+              Number(state.cartItems[pIndex].qty) - 1
             ).toString();
   
             // localStorage.setItem("cart", JSON.stringify(state.basket));
@@ -67,6 +67,17 @@ export const cartSlice = createSlice({
           cartItems: [...state.cartItems, action.payload]
         };  
       },
+       REMOVE_CART: (state, action: PayloadAction<any>) => {
+        const removeProduct = state.cartItems.filter((item)=> item.productId !== action.payload)
+        console.log("Remove Product",action.payload)
+             
+  return {
+    ...state,
+    cartItems: removeProduct,
+  };
+       
+
+      },
       decrement: (state) => {
         state.value -= 1;
       },
@@ -81,7 +92,7 @@ export const cartSlice = createSlice({
 //       allProducts: action.payload,
 //     };
   // Action creators are generated for each case reducer function
-  export const { UPDATE_QUANTITY, ADD_TO_CART, decrement, incrementByAmount,GET_PRODUCTS } = cartSlice.actions
+  export const {REMOVE_CART, UPDATE_QUANTITY, ADD_TO_CART, decrement, incrementByAmount,GET_PRODUCTS } = cartSlice.actions
   
   // Other code such as selectors can use the imported `RootState` type
   export const selectCount = (state: RootState) => state.cart.value;

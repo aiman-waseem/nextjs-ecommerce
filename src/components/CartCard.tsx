@@ -1,6 +1,6 @@
 "use client"
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks'
-import { GET_PRODUCTS, UPDATE_QUANTITY } from '@/reducer/reducer'
+import { GET_PRODUCTS, REMOVE_CART, UPDATE_QUANTITY } from '@/reducer/reducer'
 import Image from 'next/image'
 import React from 'react'
 import { urlForImage } from '../../sanity/lib/image'
@@ -15,6 +15,8 @@ const dispatch = useAppDispatch()
   const handleQuantity = (productId:string,state:string) =>{
     console.log(productId, state)
      if (state === "inc"){
+        dispatch(UPDATE_QUANTITY({productId,state}))
+     } else if (state === "dec"){
         dispatch(UPDATE_QUANTITY({productId,state}))
      }
   }
@@ -44,14 +46,16 @@ const dispatch = useAppDispatch()
                      <div className='space-x-4 text-lg font-medium'>
                         <span
                         className='cursor-pointer'
-                        //   onClick={()=> {quantity>1 && setQuantity(quantity-1)}}
+                        onClick={()=> {item.qty>1 && handleQuantity(item.productId,"dec") }}
                         > -</span>
                         <span>{item.qty} </span>
                         <span className='cursor-pointer' onClick={()=> handleQuantity(item.productId,"inc")} > + </span>
                      </div>
                 </div>
         </div>
-        <span className='justify-items-end text-red-600'> Remove </span>
+        <span className='justify-items-end cursor-pointer text-red-600'
+         onClick={()=>dispatch(REMOVE_CART(item.productId))}
+        > Remove </span>
       </div>
     
     ))

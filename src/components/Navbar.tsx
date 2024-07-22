@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className='container-fluid '>
       <div className='container pl-[0.5rem] lg:pl-[2rem] '>
-      <div className=' bg-red-200 z-40 lg:w-[95%] w-[95%]  fixed h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center'>
+      <div className=' bg-red-200 z-40 lg:w-[90%] w-[95%]  fixed h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center'>
       
        <div className='flex '>
        <button className='lg:hidden pl-3'
