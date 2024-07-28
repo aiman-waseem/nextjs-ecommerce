@@ -13,7 +13,11 @@ interface CartState {
   const initialState: CartState = {
     value: 0,
     products: [],
-    cartItems: [],
+    // cartItems: typeof window !== "undefined"
+    // ? JSON.parse(localStorage.getItem("cart")) || []
+    // : false,
+    cartItems: JSON.parse(localStorage.getItem("cart") as string) || []
+    
   }
 
 export const cartSlice = createSlice({
@@ -70,7 +74,8 @@ export const cartSlice = createSlice({
        REMOVE_CART: (state, action: PayloadAction<any>) => {
         const removeProduct = state.cartItems.filter((item)=> item.productId !== action.payload)
         console.log("Remove Product",action.payload)
-             
+        localStorage.setItem("cart", JSON.stringify(removeProduct));
+
   return {
     ...state,
     cartItems: removeProduct,
