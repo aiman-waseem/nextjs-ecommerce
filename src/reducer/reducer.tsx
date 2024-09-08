@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/app/store/store'
-
+import toast from 'react-hot-toast';
 // Define a type for the slice state
 interface CartState {
     value: number;
@@ -50,27 +50,63 @@ export const cartSlice = createSlice({
             // localStorage.setItem("cart", JSON.stringify(state.basket));
           }
       }},
+      // ADD_TO_CART: (state, action: PayloadAction<any>) => {
+      //   // state.cart.push(action.payload);
+      //   // return {
+      //   //   ...state,
+      //   //   basket: [...state.basket, action.item],
+      //   //   openMessage: {
+      //   //     type: "success",
+      //   //     text: "Item added successfully!",
+      //   //     bgColor: "green",
+      //   //   },
+      //   // };
+      //   const isProductExist = state.cartItems.find((item)=> item.productId === action.payload.productId  )
+      //   console.log("ADDED TO CART",action.payload)
+      //   localStorage.setItem(
+      //     "cart",
+      //     JSON.stringify([...state.cartItems, action.payload])
+      //   );
+      //   return {
+      //     ...state,
+      //     cartItems: [...state.cartItems, action.payload]
+      //   };  
+      // },
+
       ADD_TO_CART: (state, action: PayloadAction<any>) => {
-        // state.cart.push(action.payload);
-        // return {
-        //   ...state,
-        //   basket: [...state.basket, action.item],
-        //   openMessage: {
-        //     type: "success",
-        //     text: "Item added successfully!",
-        //     bgColor: "green",
-        //   },
-        // };
-        console.log("ADDED TO CART",action.payload)
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([...state.cartItems, action.payload])
+        const productExists = state.cartItems.find(
+          item => item.productId === action.payload.productId
         );
-        return {
-          ...state,
-          cartItems: [...state.cartItems, action.payload]
-        };  
+      
+        if (productExists) {
+          // If the product already exists in the cart, update its quantity
+          const updatedCartItems = state.cartItems.map(item =>
+            item.productId === action.payload.productId
+              ? { ...item, qty: item.qty + 1 } // Update quantity
+              : item
+          );
+          toast.success(`${action.payload.qty}  ${action.payload.productName} added in cart `) ;
+
+      
+          localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+          return {
+            ...state,
+            cartItems: updatedCartItems,
+          };
+        } else {
+          // If the product is new to the cart, add it
+          const newCartItems = [...state.cartItems, action.payload];
+          localStorage.setItem("cart", JSON.stringify(newCartItems));
+          toast.success(`${action.payload.qty} ${action.payload.productName} added in cart `) ;
+
+
+          return {
+            ...state,
+            cartItems: newCartItems,
+          };
+        }
       },
+      
        REMOVE_CART: (state, action: PayloadAction<any>) => {
         const removeProduct = state.cartItems.filter((item)=> item.productId !== action.payload)
         console.log("Remove Product",action.payload)

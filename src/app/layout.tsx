@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Providers from "./Providers";
+import toast, { Toaster } from 'react-hot-toast'; 
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
 <Providers>
 <Navbar/>
-
-      
+<Toaster/>
 {children}
 
 <Footer/>

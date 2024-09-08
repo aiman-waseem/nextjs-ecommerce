@@ -21,6 +21,8 @@ export interface IProduct {
     slug:string
   }
 
+ 
+
 // setProduct is a setter function 
 // (parameter: Type, ...) => ReturnType (general syntax of func)
 // setProduct is a function which take parameter named product of type IProduct and return type is void 

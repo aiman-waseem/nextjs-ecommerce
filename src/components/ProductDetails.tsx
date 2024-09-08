@@ -69,9 +69,9 @@ const ProductDetails = ({params}:{params: {category:string, slug:string}}) => {
     const addCart = {
            productId: product?._id,
           productName: product?.title,
-          productCategory: product?.category,
+          productCategory: product?.category?.productCategory,
           price:product?.price,
-          productImage:product?.prodImg,
+          productImage:product?.prodImg[0],
           qty: quantity,
         }
         dispatch(ADD_TO_CART(addCart))

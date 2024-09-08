@@ -94,12 +94,15 @@ import { ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { ADD_TO_CART } from '@/reducer/reducer'
+import { addToCart } from '@/endpoints/cart'
 
 // The `state` arg is correctly typed as `RootState` already
 
 const AllProducts = () => {
   const router = useRouter()
   const allProducts = useAppSelector((state) => state.cart.products)
+  const cartProducts = useAppSelector((state)=> state.cart.cartItems)
+  const [prodId, setProdId] = useState("")
 const dispatch = useAppDispatch()
   const [products, setProducts] = useState<IProduct[]>([])
 
@@ -109,20 +112,69 @@ const dispatch = useAppDispatch()
 
   }, [])
     console.log("Products from reducer", allProducts)
+    console.log("cart products from sll prod", cartProducts)
   const handleProductClick = (category:string, productName:string) => {
     router.push(`/${category}/${productName}`)
   }
-const handleCart=(product:IProduct)=>{
-  const addCart = {
-    productId: product?._id,
-    productName: product?.title,
-    productCategory: product?.category,
-    price:product?.price,
-    productImage:product?.prodImg,
-    qty:1,
-  }
-  dispatch(ADD_TO_CART(addCart))
-}
+// const handleCart=(product:IProduct, prodId:string)=>{
+ 
+//   // if item already in cartitem then  update(add) quantity of that product only 
+//   const addCart = {
+//     productId: product?._id,
+//     productName: product?.title,
+//     productCategory: product?.category?.productCategory,
+//     price:product?.price,
+//     productImage:product?.prodImg[0],
+//     qty:1,
+//   }
+  
+//   addToCart(addCart)
+//   console.log(addCart)
+//   dispatch(ADD_TO_CART(addCart))
+
+// }
+// const handleCart=(product:IProduct)=>{
+ 
+// const productInCart =  cartProducts.find((item)=> item.productId === product?._id  )
+
+// console.log("Product In cart", productInCart)
+
+
+//     const addCart = {
+//     productId: product?._id,
+//     productName: product?.title,
+//     productCategory: product?.category?.productCategory,
+//     price:product?.price,
+//     productImage:product?.prodImg[0],
+//     qty: productInCart? productInCart.qty+1:1  ,
+//   }
+//   addToCart(addCart)
+//   console.log(addCart)
+//   dispatch(ADD_TO_CART(addCart))
+
+  
+
+// }
+const handleCart = (product: IProduct, prodId: string) => {
+  const productInCart = cartProducts.find(item => item.productId === product._id);
+
+  const addCart = 
+  productInCart
+    ? { ...productInCart, qty: productInCart.qty + 1 } // Update quantity if product already in cart
+    : {
+        productId: product?._id,
+        productName: product?.title,
+        productCategory: product?.category?.productCategory,
+        price: product?.price,
+        productImage: product?.prodImg[0],
+        qty: 1, // Add new product with quantity 1
+      };
+    addToCart(addCart,dispatch)
+  // dispatch(ADD_TO_CART(addCart));
+};
+
+
+
   return (
     <div className='container'>
       <div className='grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 pt-20 gap-10 justify-center'>
@@ -156,7 +208,7 @@ const handleCart=(product:IProduct)=>{
                   // onClick={()=> dispatch(ADD_TO_CART({
                   //   payload: 
                   // }))}
-                  onClick={()=> handleCart(item)}
+                  onClick={()=> {handleCart(item,item._id);  }}
                 >
                   <ShoppingCart size={18} />
                 </div>
