@@ -4,7 +4,7 @@ import { GET_PRODUCTS, REMOVE_CART, UPDATE_QUANTITY } from '@/reducer/reducer'
 import Image from 'next/image'
 import React from 'react'
 import { urlForImage } from '../../sanity/lib/image'
-import { addToCart } from '@/endpoints/cart'
+import { addToCart, deleteCart } from '@/endpoints/cart'
 
 
 const CartCard = () => {
@@ -24,6 +24,7 @@ const dispatch = useAppDispatch()
   }
   return (
     cartProducts.map((item,indx)=>(
+      <div className='mt-5 p-3 rounded '>
         <div key={indx} className='flex rounded shadow-sm mb-4 bg-gray-100' >
         <div className='  mx-2 p-3'>
         <div className=' mt-5 flex justify-center'>
@@ -40,7 +41,7 @@ const dispatch = useAppDispatch()
         </div>
         <div className='p-3'>
            <h3 className='font-semibold text-base'> {item.productName} </h3>
-           <p> ${item.price} </p>
+           <p> ${item.qty * item.price} </p>
            <p> quantity: {item.qty} </p>
 
            <div className='pt-8 flex items-center space-x-5'>
@@ -57,9 +58,10 @@ const dispatch = useAppDispatch()
         </div>
         <span className='justify-items-end cursor-pointer text-red-600'
          onClick={()=>dispatch(REMOVE_CART(item.productId))}
+        // onClick={()=>{deleteCart(item.productId,dispatch)}}
         > Remove </span>
       </div>
-    
+      </div>
     ))
    
   )
