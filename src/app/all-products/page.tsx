@@ -181,39 +181,72 @@ const handleCart = (product: IProduct, prodId: string) => {
         {allProducts.map((item) => {
           const { productCategory } = item.category;
           return (
-            <div key={item.slug} className='mt-5 p-3 rounded-xl shadow-lg'>
-              <div>
-                <Image
-                  className='min-h-[266px]  cursor-pointer'
-                  alt='img'
-                  src={urlForImage(item.prodImg[0])}
-                  width={250}
-                  height={100}
-                  onClick={() => handleProductClick(productCategory, item.slug)}
-                />
-              </div>
-              <div className='pt-2 flex justify-between items-center'>
-                <div>
-                  <h2 className='text-base capitalize font-medium'>{item.title}</h2>
-                  <h3 className='font-bold'>{item.price}</h3>
-                </div>
-                <div
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                  }}
-                  className='flex justify-center items-center border border-black'
-                  // onClick={()=> dispatch(ADD_TO_CART({
-                  //   payload: 
-                  // }))}
-                  onClick={()=> {handleCart(item,item._id);  }}
-                >
-                  <ShoppingCart size={18} />
-                </div>
-              </div>
-            </div>
+            // <div key={item.slug} className='mt-5 p-3 rounded-xl shadow-lg'>
+            //   <div className='bg-warning p-0 m-0 flex justify-content-center'>
+              
+            //       <Image
+            //       className='min-h-[266px]  cursor-pointer'
+            //       alt='img'
+            //       src={urlForImage(item.prodImg[0])}
+            //       width={250}
+            //       height={100}
+            //       onClick={() => handleProductClick(productCategory, item.slug)}
+            //     />
+              
+            //   </div>
+            //   <div className='pt-2  flex justify-between items-center'>
+            //     <div>
+            //       <h2 className='text-base capitalize font-medium'>{item.title}</h2>
+            //       <h3 className='font-bold'>{item.price}</h3>
+            //     </div>
+            //     <div
+            //       style={{
+            //         width: "32px",
+            //         height: "32px",
+            //         borderRadius: "8px",
+            //         cursor: "pointer",
+            //       }}
+            //       className='flex justify-center items-center border border-black'
+            //       // onClick={()=> dispatch(ADD_TO_CART({
+            //       //   payload: 
+            //       // }))}
+            //       onClick={()=> {handleCart(item,item._id);  }}
+            //     >
+            //       <ShoppingCart size={18} />
+            //     </div>
+            //   </div>
+            // </div>
+            <div key={item.slug} className='mt-5 p-3 rounded-xl shadow-lg overflow-hidden'> {/* Added overflow-hidden */}
+  <div className=' p-0 m-0 flex justify-center'> {/* Changed justify-content-center to justify-center */}
+    <Image
+      className='min-h-[266px] cursor-pointer' 
+      alt='img' 
+      src={urlForImage(item.prodImg[0])} 
+      width={250} 
+      height={100} 
+      onClick={() => handleProductClick(productCategory, item.slug)} 
+    />
+  </div>
+  <div className='pt-2 flex justify-between items-center'>
+    <div>
+      <h2 className='text-base capitalize font-medium'>{item.title}</h2>
+      <h3 className='font-bold'>{item.price}</h3>
+    </div>
+    <div
+      style={{
+        width: '32px',
+        height: '32px',
+        borderRadius: '8px',
+        cursor: 'pointer',
+      }}
+      className='flex justify-center items-center border border-black'
+      onClick={() => { handleCart(item, item._id); }}
+    >
+      <ShoppingCart size={18} />
+    </div>
+  </div>
+</div>
+
           )
         })}
       </div>

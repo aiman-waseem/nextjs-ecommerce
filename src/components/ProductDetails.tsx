@@ -124,7 +124,10 @@ const ProductDetails = ({params}:{params: {category:string, slug:string}}) => {
                 <h2 className='font-extrabold text-2xl pt-7'> {product?.price ? product.price * quantity : 'Loading...'}</h2>
 
                 <div className='pt-7'>
-                <Button className='bg-black rounded space-x-2  text-white p-4' variant={'default'}
+                    {/* <Button className='hover:bg-black hover:text-white rounded-sm m-5' variant={'outline'}
+           onClick={handleCheckout}
+          >Proceed to Checkout</Button> */}
+                <Button className=' hover:bg-black hover:text-white bg-black rounded space-x-2  text-white p-4' variant={'default'}
                  onClick={handleAddToCart}
                 >
                     <ShoppingCart size={19} />
