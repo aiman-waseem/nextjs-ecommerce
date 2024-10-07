@@ -57,8 +57,8 @@ const dispatch = useAppDispatch()
                 </div>
         </div>
         <span className='justify-items-end cursor-pointer text-red-600'
-         onClick={()=>dispatch(REMOVE_CART(item.productId))}
-        // onClick={()=>{deleteCart(item.productId,dispatch)}}
+        //  onClick={()=>dispatch(REMOVE_CART(item.productId))}
+        onClick={()=>{deleteCart(item.productId,dispatch)}}
         > Remove </span>
       </div>
       </div>

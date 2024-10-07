@@ -20,6 +20,14 @@ const config = {
         "2xl": "1400px",
       },
     },
+  
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Roboto'],
+      },
+    },
+  },
     extend: {
       colors: {
         border: "hsl(var(--border))",
