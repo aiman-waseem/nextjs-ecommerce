@@ -82,8 +82,8 @@ const handleCheckout = async () => {
       {cartProducts.length > 0 && (
         <div className="bg-gray-100 mt-9 p-3 h-[25rem] relative rounded">
           <p className='text-2xl mb-3' >Order Summary</p>
-          {cartProducts.map((item) => (
-          <div className="flex justify-between  ">
+          {cartProducts.map((item,index) => (
+          <div key={index} className="flex justify-between  ">
             <div className="flex-grow text-lg  ">
             <p className=' text-xl py-2'> {item.productName} 
 
