@@ -12,10 +12,10 @@
 //     console.log("object", product)
 //   return (
 //     <div className='container pt-20'>
-//         {product.map((item)=> {
+//         {product.map((item, index)=> {
 //             return(
            
-//        <div className='  grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 justify-center '>
+//        <div className='  grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 justify-center ' key={index}>
               
 //         <div className='bg-purple-400 p-3 mt-5 flex justify-center'>
 //                <Image

@@ -29,8 +29,8 @@ const Navbar = () => {
 
         <div className='hidden  lg:flex flex-grow justify-center'>
           <ul className='flex gap-20'>
-           {NAV_LINKS.map((item)=> (
-            <li>
+           {NAV_LINKS.map((item,indx)=> (
+            <li key={indx}>
               <Link   className='hover:text-neutral-500' href={item.url} > {item.title} </Link>
             </li>
            ) )}
