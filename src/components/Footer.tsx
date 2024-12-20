@@ -22,20 +22,20 @@ const Footer = () => {
 
          <div className=' footer-section'> 
            <strong className='text-lg'> Company </strong> 
-            {["About","Terms Of Use","Privacy policy","How it Works?","Contact Us"].map((item)=>(
-              <Link href="#" className='py-2'> {item} </Link>
+            {["About","Terms Of Use","Privacy policy","How it Works?","Contact Us"].map((item,indx)=>(
+              <Link key={indx} href="#" className='py-2'> {item} </Link>
             ))} 
          </div>
          <div className=' footer-section'>
          <strong className='text-lg'> Support </strong>  
-         {["Support Carrer","24h Service","Quick Chat"].map((item)=>(
-              <Link href="#" className='py-2'> {item} </Link>
+         {["Support Carrer","24h Service","Quick Chat"].map((item,index)=>(
+              <Link key={index} href="#" className='py-2'> {item} </Link>
             ))} 
          </div>
          <div className=' footer-section'>
          <strong className='text-lg'> Contact </strong>
-         {["Whatsapp","24h Service"].map((item)=>(
-              <Link href="#" className='py-2'> {item} </Link>
+         {["Whatsapp","24h Service"].map((item,index)=>(
+              <Link key={index} href="#" className='py-2'> {item} </Link>
             ))}    
          </div>
         
