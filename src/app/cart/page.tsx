@@ -6,7 +6,7 @@ import { useAppSelector } from '../store/hooks'
 
 
 
-const page = () => {
+const Cart = () => {
     const cartProducts = useAppSelector((state) => state.cart.cartItems)
   
   return (
@@ -34,4 +34,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Cart
