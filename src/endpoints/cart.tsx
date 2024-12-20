@@ -2,6 +2,7 @@ import React from 'react'
 import axios from "axios"
 import { IProduct } from '@/lib/ProductData'
 import { ADD_TO_CART, REMOVE_CART } from '@/reducer/reducer'
+import { AppDispatch } from '@/app/store/store'
 
 export interface ICart {
          productId: string,
@@ -12,13 +13,13 @@ export interface ICart {
         qty:number,
     }
     
-export async function addToCart (cartObj:ICart,dispatch,setLoader){
-  setLoader(true)
+export async function addToCart (cartObj:ICart,dispatch:AppDispatch){
+ 
     try {
        const res = await  axios.post (`/api/cart`,cartObj)
        console.log("response", res)
        dispatch(ADD_TO_CART(cartObj));
-  setLoader(false)
+ 
 
     } catch (error) {
         console.log("Error from addCart endpoint", error)
@@ -36,7 +37,7 @@ export async function addToCart (cartObj:ICart,dispatch,setLoader){
 //     }
 // }
 
-export async function deleteCart(productId: string, dispatch) {
+export async function deleteCart(productId: string, dispatch:AppDispatch ) {
     console.log("API DELETE PRODUCT ID",productId)
     try {
       const res = await axios.delete(`/api/cart/delete?productId=${productId}`)

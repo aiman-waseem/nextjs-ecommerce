@@ -11,7 +11,7 @@ const Cart = () => {
   
   return (
     <div className='container'>
-     {cartProducts.length > 0 ?
+     {cartProducts?.length > 0 ?
      (  <div className='  grid grid-cols-11   pt-[8rem] gap-4'>
       
        <div className='  col-span-7   '>

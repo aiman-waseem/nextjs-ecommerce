@@ -17,7 +17,7 @@ interface CartState {
     // cartItems: typeof window !== "undefined"
     // ? JSON.parse(localStorage.getItem("cart")) || []
     // : false,
-    cartItems: JSON.parse(localStorage.getItem("cart") as string) || [],
+    cartItems: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("cart") as string) || [] : [],
     isOpen: false,
 
     

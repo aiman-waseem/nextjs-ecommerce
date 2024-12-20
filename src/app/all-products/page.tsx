@@ -85,7 +85,7 @@
 
 "use client"
 import React, { useEffect, useState } from 'react'
-import { client } from '../../../sanity/lib/client'
+
 import { IProduct, getAllProductsData } from '@/lib/ProductData'
 
 import Image from 'next/image'
@@ -93,7 +93,7 @@ import { urlForImage } from '../../../sanity/lib/image'
 import { LoaderCircle, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { ADD_TO_CART } from '@/reducer/reducer'
+
 import { addToCart } from '@/endpoints/cart'
 
 // The `state` arg is correctly typed as `RootState` already
@@ -103,7 +103,7 @@ const AllProducts = () => {
   const allProducts = useAppSelector((state) => state.cart.products)
   const cartProducts = useAppSelector((state)=> state.cart.cartItems)
   const [prodId, setProdId] = useState("")
-  const [loader, setLoader] = useState(false)
+  
 const dispatch = useAppDispatch()
   const [products, setProducts] = useState<IProduct[]>([])
 
@@ -170,7 +170,7 @@ const handleCart = (product: IProduct, prodId: string) => {
         productImage: product?.prodImg[0],
         qty: 1, // Add new product with quantity 1
       };
-    addToCart(addCart,dispatch, setLoader)
+    addToCart(addCart,dispatch)
   // dispatch(ADD_TO_CART(addCart));
 };
 
