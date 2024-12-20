@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Providers from "./Providers";
 import toast, { Toaster } from 'react-hot-toast'; 
+import CartOffcanvas from "@/components/CartOffcanvas";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
 <Providers>
+{/* <CartOffcanvas /> */}
+
 <Navbar/>
+
 <Toaster/>
 {children}
 

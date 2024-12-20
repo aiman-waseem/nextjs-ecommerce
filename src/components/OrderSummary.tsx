@@ -80,12 +80,18 @@ const handleCheckout = async () => {
   return (
     <>
       {cartProducts.length > 0 && (
-        <div className="bg-red-200 p-3 mt-5 rounded">
-          <p>Order Summary</p>
+        <div className="bg-gray-100 mt-9 p-3 h-[25rem] relative rounded">
+          <p className='text-2xl mb-3' >Order Summary</p>
           {cartProducts.map((item) => (
-          <div className="flex justify-between">
-            <div className="flex-grow">
-            <p>{item.qty}X {item.productName}</p>
+          <div className="flex justify-between  ">
+            <div className="flex-grow text-lg  ">
+            <p className=' text-xl py-2'> {item.productName} 
+
+              <span className='text-[18px] font-semibold ps-2'>
+            x{item.qty}
+
+              </span>
+               </p>
               {/* <p>Quantity</p>
               <p>Subtotal</p> */}
             </div>
@@ -94,7 +100,7 @@ const handleCheckout = async () => {
              
                 <div key={item.id}>
                   
-                  <p>${item.qty * item.price}</p>
+                  <p className='py-2 text-lg'>${item.qty * item.price}</p>
                 </div>
                 </div>
               ))}
@@ -102,11 +108,16 @@ const handleCheckout = async () => {
           
           
           {/* Total Quantity */}
-          <div className="ml-auto text-right mt-3">
-            <p>Total Price: ${totalPrice}</p>
+          <div className="ml-auto  text-right mt-3 ">
+          <hr className="border-black border-t-2 mt-5" />
+
+
+            <p className='text-lg'>
+              <span className=' font-semibold'> Subtotal: </span>
+               ${totalPrice}</p>
           </div>
 
-          <Button className='hover:bg-black hover:text-white rounded-sm m-5' variant={'outline'}
+          <Button className='hover:bg-black absolute bottom-2 right-0 left-0 mx-2 rounded hover:text-white text-lg py-1 ' variant={'outline'}
            onClick={handleCheckout}
           >Proceed to Checkout</Button>
           </div>

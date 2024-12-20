@@ -12,14 +12,18 @@ export interface ICart {
         qty:number,
     }
     
-export async function addToCart (cartObj:ICart,dispatch){
+export async function addToCart (cartObj:ICart,dispatch,setLoader){
+  setLoader(true)
     try {
        const res = await  axios.post (`/api/cart`,cartObj)
        console.log("response", res)
        dispatch(ADD_TO_CART(cartObj));
+  setLoader(false)
+
     } catch (error) {
         console.log("Error from addCart endpoint", error)
     }
+
 }
 
 // export async function deleteCart (productId:string,dispatch){

@@ -90,7 +90,7 @@ import { IProduct, getAllProductsData } from '@/lib/ProductData'
 
 import Image from 'next/image'
 import { urlForImage } from '../../../sanity/lib/image'
-import { ShoppingCart } from 'lucide-react';
+import { LoaderCircle, ShoppingCart } from 'lucide-react';
 import { useRouter } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { ADD_TO_CART } from '@/reducer/reducer'
@@ -103,6 +103,7 @@ const AllProducts = () => {
   const allProducts = useAppSelector((state) => state.cart.products)
   const cartProducts = useAppSelector((state)=> state.cart.cartItems)
   const [prodId, setProdId] = useState("")
+  const [loader, setLoader] = useState(false)
 const dispatch = useAppDispatch()
   const [products, setProducts] = useState<IProduct[]>([])
 
@@ -169,7 +170,7 @@ const handleCart = (product: IProduct, prodId: string) => {
         productImage: product?.prodImg[0],
         qty: 1, // Add new product with quantity 1
       };
-    addToCart(addCart,dispatch)
+    addToCart(addCart,dispatch, setLoader)
   // dispatch(ADD_TO_CART(addCart));
 };
 
@@ -230,7 +231,7 @@ const handleCart = (product: IProduct, prodId: string) => {
   <div className='pt-2 flex justify-between items-center'>
     <div>
       <h2 className='text-base capitalize font-medium'>{item.title}</h2>
-      <h3 className='font-bold'>{item.price}</h3>
+      <h3 className='font-bold'>${item.price}</h3>
     </div>
     <div
       style={{
@@ -242,7 +243,8 @@ const handleCart = (product: IProduct, prodId: string) => {
       className='flex justify-center items-center border border-black'
       onClick={() => { handleCart(item, item._id); }}
     >
-      <ShoppingCart size={18} />
+        {/* { loader? <LoaderCircle/> :  <ShoppingCart size={18} />} */}
+        <ShoppingCart size={18} />
     </div>
   </div>
 </div>

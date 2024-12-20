@@ -7,6 +7,7 @@ interface CartState {
     value: number;
     products: any[];
     cartItems: any[];
+    isOpen: boolean;
   }
   
   // Define the initial state using that type
@@ -16,7 +17,9 @@ interface CartState {
     // cartItems: typeof window !== "undefined"
     // ? JSON.parse(localStorage.getItem("cart")) || []
     // : false,
-    cartItems: JSON.parse(localStorage.getItem("cart") as string) || []
+    cartItems: JSON.parse(localStorage.getItem("cart") as string) || [],
+    isOpen: false,
+
     
   }
 
@@ -106,7 +109,12 @@ export const cartSlice = createSlice({
           };
         }
       },
-      
+      TOGGLE_CART: (state) => {
+        state.isOpen = !state.isOpen;
+      },
+      OPEN_CART : (state) => {
+        state.isOpen = true
+      },
        REMOVE_CART: (state, action: PayloadAction<any>) => {
         const removeProduct = state.cartItems.filter((item)=> item.productId !== action.payload)
         console.log("Remove Product",action.payload)
@@ -133,7 +141,7 @@ export const cartSlice = createSlice({
 //       allProducts: action.payload,
 //     };
   // Action creators are generated for each case reducer function
-  export const {REMOVE_CART, UPDATE_QUANTITY, ADD_TO_CART, decrement, incrementByAmount,GET_PRODUCTS } = cartSlice.actions
+  export const {REMOVE_CART, UPDATE_QUANTITY, ADD_TO_CART, decrement, incrementByAmount,GET_PRODUCTS, TOGGLE_CART,OPEN_CART } = cartSlice.actions
   
   // Other code such as selectors can use the imported `RootState` type
   export const selectCount = (state: RootState) => state.cart.value;

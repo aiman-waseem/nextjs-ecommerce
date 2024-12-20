@@ -7,7 +7,9 @@ export default function Home() {
     <Banner/>
     <div className="mx-auto max-w-[90%]">
     <Promotion/>
-          
+    </div>
+    <div className="">
+
     </div>
   </>
   );

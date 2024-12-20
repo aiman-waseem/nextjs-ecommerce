@@ -43,7 +43,7 @@ const Navbar = () => {
       </div> */}
 
 <div className="mx-2 w-full fixed top-0 left-0 z-40">
-  <div className="bg-red-200 w-full max-w-screen-lg mx-auto h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center px-4">
+  <div className="bg-red-200  mx-14 h-[70px] shadow-md rounded-[1rem] mt-4 flex justify-between items-center px-4">
     <div className="flex items-center">
       <button className="lg:hidden pl-3" onClick={() => setMobileDrawer(!mobileDrawer)}>
         {mobileDrawer ? <X /> : <Menu />}
@@ -65,11 +65,21 @@ const Navbar = () => {
       </ul>
     </div>
 
-    <Link href="/cart" className="pr-4">
+    {/* <Link href="/cart" className="pr-4">
       <span>
         <ShoppingCart /> {cartItems.length}
       </span>
-    </Link>
+    </Link> */}
+    <Link href="/cart" className="relative pr-4">
+  <span className="relative">
+    <ShoppingCart  size={30} />
+    {cartItems.length > 0 && (
+      <span className="absolute -top-2 -right-3 bg-red-500 text-white text-sm font-bold rounded-full w-5 h-5 flex items-center justify-center">
+        {cartItems.length}
+      </span>
+    )}
+  </span>
+</Link>
   </div>
 </div>
 

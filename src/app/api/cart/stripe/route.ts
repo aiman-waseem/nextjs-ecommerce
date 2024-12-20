@@ -129,7 +129,7 @@ export const POST = async (req: NextRequest) => {
         quantity: item.qty,
       })),
       mode: 'payment',
-      success_url: `${req.headers.get('origin')}/?success=true`,
+      success_url: `${req.headers.get('origin')}/paymentSuccess`, // Redirect to success page
       cancel_url: `${req.headers.get('origin')}/?canceled=true`,
     });
 
